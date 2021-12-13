@@ -1,6 +1,8 @@
-const { hanoiStack } = PacktDataStructuresAlgorithms;
-const { hanoi } = PacktDataStructuresAlgorithms;
+// const { hanoiStack } = PacktDataStructuresAlgorithms;
+// const { hanoi } = PacktDataStructuresAlgorithms;
 
-console.log(hanoiStack(3));
+import { hanoiStack, hanoi } from './../../src/js/others/hanoi.js';
 
-console.log(hanoi(3, 'source', 'helper', 'dest'));
+console.log(hanoiStack(4));
+
+console.log(hanoi(4, 'source', 'helper', 'dest'));

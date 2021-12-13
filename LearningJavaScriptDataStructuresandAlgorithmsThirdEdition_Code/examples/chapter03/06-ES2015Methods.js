@@ -1,6 +1,6 @@
 // @ts-check
-
-const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
+// /* eslint-disable */
+const numbers = [1, 14, 15, 26];
 
 //* ********* using for..of loop
 for (const n of numbers) {
@@ -11,17 +11,21 @@ for (const n of numbers) {
 console.log('Using the new ES6 iterator (@@iterator)');
 
 let iterator = numbers[Symbol.iterator]();
+console.log('iterator1', iterator);
 console.log('iterator.next().value', iterator.next().value); // 1
 console.log('iterator.next().value', iterator.next().value); // 2
 console.log('iterator.next().value', iterator.next().value); // 3
 console.log('iterator.next().value', iterator.next().value); // 4
 console.log('iterator.next().value', iterator.next().value); // 5
-
+console.log('iterator.next().value', iterator.next().value); // 5
+console.log('iterator2', iterator);
 // or use code below
 iterator = numbers[Symbol.iterator]();
+console.log('iterator3', iterator);
 for (const n of iterator) {
   console.log(`${n} of iterator`, n);
 }
+console.log('iterator4', iterator);
 
 //* ********* Array entries, keys and values
 console.log('Array entries, keys and values');
@@ -30,6 +34,8 @@ console.log('Array.entries');
 let aEntries = numbers.entries(); // retrieve iterator of key/value
 console.log('aEntries.next().value', aEntries.next().value); // [0, 1] - position 0, value 1
 console.log('aEntries.next().value', aEntries.next().value); // [1, 2] - position 1, value 2
+console.log('aEntries.next().value', aEntries.next().value); // [2, 3] - position 2, value 3
+console.log('aEntries.next().value', aEntries.next().value); // [2, 3] - position 2, value 3
 console.log('aEntries.next().value', aEntries.next().value); // [2, 3] - position 2, value 3
 
 // or use code below
@@ -43,12 +49,16 @@ const aKeys = numbers.keys(); // retrieve iterator of keys
 console.log('aKeys.next()', aKeys.next()); // {value: 0, done: false } done false means iterator has more values
 console.log('aKeys.next()', aKeys.next()); // {value: 1, done: false }
 console.log('aKeys.next()', aKeys.next()); // {value: 2, done: false }
+console.log('aKeys.next()', aKeys.next()); // {value: 2, done: false }
+console.log('aKeys.next()', aKeys.next()); // {value: 2, done: false }
 
 console.log('Array.values - Only Edge and Safari - Oct 2017');
-// const aValues = numbers.values();
-// console.log(aValues.next()); // {value: 1, done: false } done false means iterator has more values
-// console.log(aValues.next()); // {value: 2, done: false }
-// console.log(aValues.next()); // {value: 3, done: false }
+const aValues = numbers.values();
+console.log(aValues.next()); // {value: 1, done: false } done false means iterator has more values
+console.log(aValues.next()); // {value: 2, done: false }
+console.log(aValues.next()); // {value: 3, done: false }
+console.log(aValues.next()); // {value: 3, done: false }
+console.log(aValues.next()); // {value: 3, done: false }
 
 //* ********* Using the from method
 console.log('Using the from method');
@@ -90,11 +100,11 @@ console.log('Using the copyWithin method');
 let copyArray = [1, 2, 3, 4, 5, 6];
 console.log('copyArray', copyArray);
 
-copyArray = copyArray.copyWithin(0, 3); // pos 3 value is copied to pos 0
+copyArray.copyWithin(0, 3); // pos 3 value is copied to pos 0
 console.log('copyArray.copyWithin(0, 3)', copyArray);
 
 copyArray = [1, 2, 3, 4, 5, 6];
-copyArray = copyArray.copyWithin(1, 3, 5); // pos 3-4 values are copied to pos 1-2
+copyArray.copyWithin(1, 3, 5); // pos 3-4 values are copied to pos 1-2
 console.log('copyArray.copyWithin(1, 3, 5)', copyArray);
 
 //* ********* methods find and findIndex
@@ -114,4 +124,4 @@ console.log('numbers.includes(15)', numbers.includes(15));
 console.log('numbers.includes(20)', numbers.includes(20));
 
 const numbers5 = [7, 6, 5, 4, 3, 2, 1];
-console.log('numbers5.includes(4, 5)', numbers5.includes(4, 5));
+console.log('numbers5.includes(4, 4)', numbers5.includes(4, 4));

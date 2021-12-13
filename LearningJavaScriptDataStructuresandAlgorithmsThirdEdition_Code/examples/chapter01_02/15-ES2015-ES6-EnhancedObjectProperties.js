@@ -2,15 +2,18 @@
 /* eslint-disable */
 
 //* ****** EcmaScript 2015 (ES6): Destructuring Assignment + Property Shorthand (https://goo.gl/VsLecp )
-let [x, y] = ['a', 'b'];
+let [x, y] = [{name: 'a', value: '1'}, {name: 'b', value: '2'}];
 let obj = { x, y };
 console.log(obj); // { x: "a", y: "b" }
 
 // swap (https://goo.gl/EyFAII)
 [x, y] = [y, x];
-var temp = x;
-x = y;
-y = temp;
+// let temp = x;
+// x = y;
+// y = temp;
+
+console.log(obj);
+console.log(x, y);
 
 // code above is the same as
 var x2 = 'a';

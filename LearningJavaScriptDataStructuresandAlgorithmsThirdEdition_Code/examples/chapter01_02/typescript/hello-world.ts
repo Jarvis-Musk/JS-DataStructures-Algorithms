@@ -1,3 +1,4 @@
+/* eslint-disable */
 let myName = 'Packt';
 // myName = 10;
 

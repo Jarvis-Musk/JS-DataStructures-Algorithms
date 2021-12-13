@@ -4,17 +4,25 @@
 const _items = new WeakMap();
 const _count = new WeakMap();
 
-class Stack {
+export default class Stack {
   constructor() {
     _count.set(this, 0);
     _items.set(this, {});
   }
 
   push(element) {
-    const items = _items.get(this);
-    const count = _count.get(this);
-    items[count] = element;
-    _count.set(this, count + 1);
+    if (Array.isArray(element) && element.length > 0) {
+      const items = _items.get(this);
+      const count = _count.get(this);
+      items[count] = element.shift();
+      _count.set(this, count + 1);
+      this.push(element);
+    } else if (!Array.isArray(element)) {
+      const items = _items.get(this);
+      const count = _count.get(this);
+      items[count] = element;
+      _count.set(this, count + 1);
+    }
   }
 
   pop() {

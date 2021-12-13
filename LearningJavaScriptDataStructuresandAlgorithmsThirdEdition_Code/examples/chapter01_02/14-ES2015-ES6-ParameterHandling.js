@@ -27,7 +27,7 @@ function sum3() {
 console.log(sum3(4, 2)); // outputs 9
 
 //* ****** EcmaScript 6: spread operator ('...') (https://goo.gl/8equk5)
-let params = [3, 4, 5];
+let params = [4, 2];
 console.log(sum(...params)); // ES2015
 console.log(sum.apply(undefined, params)); // ES5
 
@@ -36,7 +36,9 @@ console.log(numbers);
 
 //* ****** EcmaScript 6: rest parameter ('...') (https://goo.gl/LaJZqU)
 function restParamaterFunction(x, y, ...a) {
-  return (x + y) * a.length;
+  // return (x + y) * a.length;
+  // return x + y + a[0] + a[1] + a[2];
+  return '' + x + y + a[0] + a[1] + a[2];
 }
 console.log(restParamaterFunction(1, 2, 'hello', true, 7)); // outputs 9;
 

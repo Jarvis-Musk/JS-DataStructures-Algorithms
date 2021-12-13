@@ -34,6 +34,7 @@ console.log('numbers.sort(compare)', numbers.sort(compare));
 const friends = [
   { name: 'John', age: 30 },
   { name: 'Ana', age: 20 },
+  { name: 'terra', age: 25 },
   { name: 'Chris', age: 25 }, // trailing comma ES2017
 ];
 
@@ -67,5 +68,5 @@ names = ['Ana', 'ana', 'john', 'John']; // reset to array original state
 console.log('names.sort((a, b) => a.localeCompare(b))', names.sort((a, b) => a.localeCompare(b)));
 
 const names2 = ['Maève', 'Maeve'];
-console.log('names2', names);
+console.log('names2', names2);
 console.log('names2.sort((a, b) => a.localeCompare(b))', names2.sort((a, b) => a.localeCompare(b)));

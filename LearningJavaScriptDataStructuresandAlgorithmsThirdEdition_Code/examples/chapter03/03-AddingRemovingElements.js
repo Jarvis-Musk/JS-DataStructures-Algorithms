@@ -32,6 +32,7 @@ console.log('Add 12 and 13 with push', numbers);
 
 // insert first position manually
 Array.prototype.insertFirstPosition = function(value) {
+  console.log('this', this);
   for (let i = this.length; i >= 0; i--) {
     this[i] = this[i - 1];
   }

@@ -1,5 +1,5 @@
 // @ts-check
-import Stack from '../data-structures/stack';
+import Stack from '../data-structures/stack.js';
 
 export function parenthesesChecker(symbols) {
   const stack = new Stack();
@@ -24,5 +24,7 @@ export function parenthesesChecker(symbols) {
     }
     index++;
   }
+  console.log('balanced', balanced);
+  console.log('isEmpty', stack.isEmpty());
   return balanced && stack.isEmpty();
 }

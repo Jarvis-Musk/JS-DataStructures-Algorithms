@@ -24,12 +24,13 @@ function blizzardFan() {
     phrase = 'For the Horde!'; // {6}
     console.log('Inside if: ' + phrase);
   }
-  phrase = 'For the Alliance!'; // {7}
+  // phrase = 'For the Alliance!'; // {7}
   console.log('After if: ' + phrase);
 }
 
 console.log(movie); // {8}
 console.log(starWarsFan()); // {9}
+console.log(movie);
 console.log(marvelFan()); // {10}
 console.log(movie); // {11}
 blizzardFan(); // {12}

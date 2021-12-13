@@ -49,7 +49,7 @@ class Person {
     this._name = name; // {1}
   }
 
-  get name() { // {2}
+  get name() { // {2} 为类属性创建存取器函数
     return this._name;
   }
 

@@ -1,6 +1,6 @@
 const _items = Symbol('stackItems');
 
-class Stack {
+export default class Stack {
   constructor() {
     this[_items] = [];
   }
@@ -37,11 +37,3 @@ class Stack {
     return this[_items].toString();
   }
 }
-
-const stack = new Stack();
-const objectSymbols = Object.getOwnPropertySymbols(stack);
-console.log(objectSymbols.length); // 1
-console.log(objectSymbols); // [Symbol()]
-console.log(objectSymbols[0]); // Symbol()
-stack[objectSymbols[0]].push(1);
-stack.print(); // 5, 8, 1

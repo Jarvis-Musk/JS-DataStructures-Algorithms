@@ -3,7 +3,7 @@
 
 let averageTempDay1 = [72, 75, 79, 79, 81, 81];
 let averageTempDay2 = [81, 79, 75, 75, 73, 72];
-
+console.table(averageTempDay2)
 let averageTemp = [];
 
 // same as
@@ -65,6 +65,8 @@ for (let i = 0; i < matrix3x3x3.length; i++) {
     }
   }
 }
+console.table(matrix3x3x3);
+
 
 // user-friendly-output
 const matrix3x3x3Output = [];
@@ -74,5 +76,6 @@ for (let i = 0; i < 3; i++) {
     matrix3x3x3Output[i][j] = `[${matrix3x3x3[i][j].join(', ')}]`;
   }
 }
+console.log(matrix3x3x3Output[2][2]);
 console.log('matrix3x3x3 three-dimensional array:');
 console.table(matrix3x3x3Output);

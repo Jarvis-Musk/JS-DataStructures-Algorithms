@@ -21,7 +21,11 @@ console.log(PI);
 const jsFramework = {
   name: 'Angular'
 };
+
+console.log(jsFramework);
 jsFramework.name = 'React';
+
+console.log(jsFramework);
 
 // error, cannot reassign object reference
 /*

@@ -6,8 +6,14 @@ export default class Stack {
     this.items = {};
   }
   push(element) {
-    this.items[this.count] = element;
-    this.count++;
+    if (Array.isArray(element) && element.length > 0) {
+      this.items[this.count] = element.shift();
+      this.count++;
+      this.push(element);
+    } else if (!Array.isArray(element)) {
+      this.items[this.count] = element;
+      this.count++;
+    }
   }
   pop() {
     if (this.isEmpty()) {
@@ -43,7 +49,7 @@ export default class Stack {
     }
     let objString = `${this.items[0]}`;
     for (let i = 1; i < this.count; i++) {
-      objString = `${objString},${this.items[i]}`;
+      objString = `${objString},${this.items[i]}`; // 上一个循环的 String 变量被内存回收了？
     }
     return objString;
   }

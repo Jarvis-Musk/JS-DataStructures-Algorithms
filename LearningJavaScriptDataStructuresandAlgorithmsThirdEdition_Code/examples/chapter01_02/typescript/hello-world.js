@@ -1,3 +1,4 @@
+/* eslint-disable */
 var myName = 'Packt';
 // myName = 10;
 var age = 20; // number

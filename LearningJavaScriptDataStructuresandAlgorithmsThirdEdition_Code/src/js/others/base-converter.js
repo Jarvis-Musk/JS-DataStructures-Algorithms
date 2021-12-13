@@ -1,11 +1,16 @@
 // @ts-check
-import Stack from '../data-structures/stack';
+import Stack from '../data-structures/stack.js';
 
 export function decimalToBinary(decNumber) {
   const remStack = new Stack();
   let number = decNumber;
   let rem;
   let binaryString = '';
+
+  if (number === 0) {
+    rem = Math.floor(number % 2);
+    remStack.push(rem);
+  }
 
   while (number > 0) {
     rem = Math.floor(number % 2);

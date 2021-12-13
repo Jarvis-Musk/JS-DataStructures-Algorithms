@@ -5,7 +5,21 @@ export default class StackArray {
     this.items = [];
   }
   push(element) {
-    this.items.push(element);
+    /**
+     * Array.prototype.push()
+     * push() 方法将一个或多个元素添加到数组的末尾，并返回该数组的新长度。
+     */
+    // example 1
+    // const returnVal = Array.isArray(element)
+    //   // ? Array.prototype.push.apply(this.items, element)
+    //   ? [].push.apply(this.items, element) // 与上行效果一样
+    //   : this.items.push(element);
+
+    // example 2
+    const returnVal = Array.isArray(element)
+      ? this.items.push(...element)
+      : this.items.push(element);
+    return returnVal;
   }
 
   pop() {

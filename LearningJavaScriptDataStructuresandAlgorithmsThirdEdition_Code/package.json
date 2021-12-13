@@ -2,6 +2,7 @@
   "name": "javascript-datastructures-algorithms",
   "version": "0.0.1",
   "description": "Learning JavaScript Data Structures and Algorithms",
+  "type": "module",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/loiane/javascript-datastructures-algorithms.git"
@@ -14,7 +15,7 @@
   },
   "homepage": "https://github.com/loiane/javascript-datastructures-algorithms",
   "scripts": {
-    "clean": "rm -rf ./dist ./coverage ./.nyc_output ./coverage.lcov ./mochawesome-report",
+    "clean": "rimraf ./dist ./coverage ./.nyc_output ./coverage.lcov ./mochawesome-report",
     "build:js": "babel src/js -d dist/js",
     "build:ts": "tsc -p ./ --rootDir ./src/ts",
     "build": "npm run build:js && npm run build:ts",

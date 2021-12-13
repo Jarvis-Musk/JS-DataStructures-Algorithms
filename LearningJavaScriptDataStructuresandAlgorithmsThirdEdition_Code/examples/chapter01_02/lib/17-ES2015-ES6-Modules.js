@@ -1,3 +1,4 @@
+/* eslint-disable */
 (function (global, factory) {
   if (typeof define === "function" && define.amd) {
     define(['./17-CalcArea.js', './17-Book.js'], factory);
