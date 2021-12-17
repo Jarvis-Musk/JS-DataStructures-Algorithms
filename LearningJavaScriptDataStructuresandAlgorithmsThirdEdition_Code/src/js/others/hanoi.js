@@ -1,40 +1,33 @@
 // @ts-check
 import Stack from '../data-structures/stack.js';
 
-function towerOfHanoi(plates, a, b, c, aName, bName, cName, moves = []) {
+function towerOfHanoi(plates, a, b, c) {
   if (plates <= 0) {
-    return moves;
+    return [];
   }
   if (plates === 1) {
     c.push(a.pop());
-    const move = {};
-    move[aName] = a.toString();
-    move[bName] = b.toString();
-    move[cName] = c.toString();
-    moves.push(move);
   } else {
-    towerOfHanoi(plates - 1, a, c, b, aName, cName, bName, moves);
+    towerOfHanoi(plates - 1, a, c, b);
     c.push(a.pop());
-    const move = {};
-    move[aName] = a.toString();
-    move[bName] = b.toString();
-    move[cName] = c.toString();
-    moves.push(move);
-    towerOfHanoi(plates - 1, b, a, c, bName, aName, cName, moves);
+    towerOfHanoi(plates - 1, b, a, c);
   }
-  return moves;
+  return `a: ${a}, b: ${b}, c: ${c}`;
 }
 
 export function hanoiStack(plates) {
-  const a = new Stack();
-  const c = new Stack();
-  const b = new Stack();
+  // const a = new Stack();
+  // const c = new Stack();
+  // const b = new Stack();
+  const a = [];
+  const b = [];
+  const c = [];
 
   for (let i = plates; i > 0; i--) {
     a.push(i);
   }
 
-  return towerOfHanoi(plates, a, b, c, 'a', 'b', 'c');
+  return towerOfHanoi(plates, a, b, c);
 }
 
 export function hanoi(plates, source, helper, dest, moves = []) {

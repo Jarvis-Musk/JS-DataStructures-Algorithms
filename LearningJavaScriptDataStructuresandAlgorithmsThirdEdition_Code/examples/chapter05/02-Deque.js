@@ -1,17 +1,31 @@
-const { Deque } = PacktDataStructuresAlgorithms;
+// const { Deque } = PacktDataStructuresAlgorithms;
+import Deque from './../../src/js/data-structures/deque.js';
 
 const deque = new Deque();
-console.log(deque.isEmpty()); // outputs true
 deque.addBack('John');
 deque.addBack('Jack');
-console.log(deque.toString()); // John,Jack
 deque.addBack('Camila');
-console.log(deque.toString()); // John,Jack,Camila
-console.log(deque.size()); // outputs 3
-console.log(deque.isEmpty()); // outputs false
+
+checkFunc(deque);
+
 deque.removeFront(); // remove John
-console.log(deque.toString()); // Jack,Camila
+
+checkFunc(deque);
+
 deque.removeBack(); // Camila decides to leave
-console.log(deque.toString()); // Jack
+
+checkFunc(deque);
+
 deque.addFront('John'); // John comes back for information
-console.log(deque.toString()); // John,Jack
+
+checkFunc(deque);
+
+
+
+
+function checkFunc (deque) {
+  console.log(`lowestCount: ${deque.lowestCount}, count: ${deque.count}`);
+  console.log(`size: ${deque.size()}`);
+  console.log(`content: ${deque.toString()}`);
+  console.log('------------------');
+}

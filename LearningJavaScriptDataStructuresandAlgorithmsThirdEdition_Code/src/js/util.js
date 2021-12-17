@@ -23,6 +23,7 @@ export function defaultCompare(a, b) {
   return a < b ? Compare.LESS_THAN : Compare.BIGGER_THAN;
 }
 
+// 使用 linkedList 类的开发者可以自行传入用于比较两个 JavaScript 对象或值是否相等的自定义函数。
 export function defaultEquals(a, b) {
   return a === b;
 }

@@ -1,4 +1,6 @@
-const { hotPotato } = PacktDataStructuresAlgorithms;
+// const { hotPotato } = PacktDataStructuresAlgorithms;
+
+import { hotPotato } from './../../src/js/others/hot-potato.js';
 
 const names = ['John', 'Jack', 'Camila', 'Ingrid', 'Carl'];
 const result = hotPotato(names, 7);

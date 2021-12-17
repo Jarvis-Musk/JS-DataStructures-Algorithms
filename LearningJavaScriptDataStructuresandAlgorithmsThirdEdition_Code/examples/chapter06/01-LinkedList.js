@@ -1,4 +1,5 @@
-const { LinkedList } = PacktDataStructuresAlgorithms;
+// const { LinkedList } = PacktDataStructuresAlgorithms;
+import LinkedList from './../../src/js/data-structures/linked-list.js';
 
 const list = new LinkedList();
 

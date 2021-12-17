@@ -1,14 +1,25 @@
-const { Queue } = PacktDataStructuresAlgorithms;
+// const { Queue } = PacktDataStructuresAlgorithms;
+import Queue from './../../src/js/data-structures/queue.js';
 
 const queue = new Queue();
-console.log(queue.isEmpty()); // outputs true
 queue.enqueue('John');
 queue.enqueue('Jack');
-console.log(queue.toString()); // John,Jack
+checkFunc(queue);
 queue.enqueue('Camila');
-console.log(queue.toString()); // John,Jack,Camila
-console.log(queue.size()); // outputs 3
-console.log(queue.isEmpty()); // outputs false
+checkFunc(queue);
 queue.dequeue(); // remove John
+checkFunc(queue);
 queue.dequeue(); // remove Jack
-console.log(queue.toString()); // Camila
+checkFunc(queue);
+queue.dequeue();
+checkFunc(queue);
+
+queue.enqueue('Apll');
+checkFunc(queue);
+
+function checkFunc (queue) {
+  console.log(`size: ${queue.size()}`);
+  console.log(`lowestCount: ${queue.lowestCount}, count: ${queue.count}`);
+  console.log(`content: ${queue.toString()}`);
+  console.log('------------------');
+}

@@ -5,7 +5,8 @@ export default class LinkedList {
   constructor(isEqual = defaultEquals) {
     this.isEqual = isEqual;
     this.count = 0; // 存储链表中的元素数量
-    this.head = undefined; // 用来表示头节点
+    this.head = undefined; // 用来表示头节点，主要使用 head 节点来判断，end 节点主要用来辅助快速定位到尾节点
+    this.end = undefined; // 用来表示尾节点
   }
   push(element) {
     const node = new Node(element);
@@ -13,6 +14,7 @@ export default class LinkedList {
     if (this.head == null) {
       // catches null && undefined
       this.head = node;
+      this.end = node;
     } else {
       current = this.head;
       while (current.next != null) {

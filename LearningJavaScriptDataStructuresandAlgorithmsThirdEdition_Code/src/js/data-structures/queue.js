@@ -2,9 +2,9 @@
 
 export default class Queue {
   constructor() {
-    this.count = 0;
-    this.lowestCount = 0;
-    this.items = {};
+    this.count = 0; // 追踪队列大小
+    this.lowestCount = 0; // 追踪第一个元素
+    this.items = {}; // 使用对象存储元素，获取元素时更高效
   }
 
   enqueue(element) {
