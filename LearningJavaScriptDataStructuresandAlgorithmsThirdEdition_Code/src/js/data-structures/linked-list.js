@@ -42,6 +42,11 @@ export default class LinkedList {
         this.head = node;
       } else {
         const previous = this.getElementAt(index - 1);
+        /* 
+        const current = previous.next;
+        node.next = current;
+        previous.next = node;
+        */
         node.next = previous.next;
         previous.next = node;
       }
@@ -58,10 +63,10 @@ export default class LinkedList {
       } else {
         const previous = this.getElementAt(index - 1);
         current = previous.next;
-        previous.next = current.next;
+        previous.next = current.next; // 当前节点会被丢弃在计算机内存中，等着被垃圾回收器清除
       }
       this.count--;
-      return current.element;
+      return current.element; // 当前节点会在何时被回收呢
     }
     return undefined;
   }
@@ -71,6 +76,7 @@ export default class LinkedList {
   }
   indexOf(element) {
     let current = this.head;
+    // 为了确保不会发生运行时错误，可以验证一下 current 变量是否为 null 或 undefined。
     for (let i = 0; i < this.size() && current != null; i++) {
       if (this.isEqual(element, current.element)) {
         return i;
@@ -93,6 +99,7 @@ export default class LinkedList {
     this.count = 0;
   }
   toString() {
+    // if (this.isEmpty()) {
     if (this.head == null) {
       return '';
     }

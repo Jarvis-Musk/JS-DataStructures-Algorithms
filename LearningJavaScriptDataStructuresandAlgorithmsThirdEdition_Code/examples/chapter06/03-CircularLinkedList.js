@@ -1,10 +1,13 @@
-const { CircularLinkedList } = PacktDataStructuresAlgorithms;
+// const { CircularLinkedList } = PacktDataStructuresAlgorithms;
+import CircularLinkedList from './../../src/js/data-structures/circular-linked-list.js'
 
 const list = new CircularLinkedList();
 
+console.log('------CircularLinkedList------');
 console.log('push element 15');
 list.push(15);
 console.log('list.toString() => ', list.toString());
+// console.log('list', list); // 当只有一个节点时，head.next 是个一路迭代下去都重复的对象
 
 console.log('push element 16');
 list.push(16);

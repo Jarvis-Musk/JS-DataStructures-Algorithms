@@ -6,7 +6,7 @@ export default class LinkedList {
     this.isEqual = isEqual;
     this.count = 0; // 存储链表中的元素数量
     this.head = undefined; // 用来表示头节点，主要使用 head 节点来判断，end 节点主要用来辅助快速定位到尾节点
-    this.end = undefined; // 用来表示尾节点
+    this.tail = undefined; // 用来表示尾节点
   }
   push(element) {
     const node = new Node(element);
@@ -14,15 +14,16 @@ export default class LinkedList {
     if (this.head == null) {
       // catches null && undefined
       this.head = node;
-      this.end = node;
     } else {
-      current = this.head;
-      while (current.next != null) {
-        // a !== null || a !=== undefined
-        current = current.next;
-      }
-      current.next = node;
+      this.tail.next = node;
+      // current = this.head;
+      // while (current.next != null) {
+      //   // a !== null || a !=== undefined
+      //   current = current.next;
+      // }
+      // current.next = node;
     }
+    this.tail = node;
     this.count++;
   }
   getElementAt(index) {
@@ -47,6 +48,11 @@ export default class LinkedList {
         node.next = previous.next;
         previous.next = node;
       }
+
+      if (this.count === 0 || index === this.count) {
+        this.tail = node;
+      }
+
       this.count++;
       return true;
     }
@@ -57,10 +63,14 @@ export default class LinkedList {
       let current = this.head;
       if (index === 0) {
         this.head = current.next;
+
+        if (index === this.count - 1) {this.tail = current.next;}
       } else {
         const previous = this.getElementAt(index - 1);
         current = previous.next;
         previous.next = current.next;
+
+        if (index === this.count - 1) {this.tail = previous;}
       }
       this.count--;
       return current.element;
@@ -90,8 +100,12 @@ export default class LinkedList {
   getHead() {
     return this.head;
   }
+  getTail() {
+    return this.tail;
+  }
   clear() {
     this.head = undefined;
+    this.tail = undefined;
     this.count = 0;
   }
   toString() {

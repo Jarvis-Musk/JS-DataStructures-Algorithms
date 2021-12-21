@@ -1,4 +1,5 @@
-const { Set } = PacktDataStructuresAlgorithms;
+// const { Set } = PacktDataStructuresAlgorithms;
+import Set from './../../src/js/data-structures/set.js';
 
 const set = new Set();
 

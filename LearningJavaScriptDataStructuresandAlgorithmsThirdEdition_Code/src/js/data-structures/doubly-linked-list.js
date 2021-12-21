@@ -1,10 +1,10 @@
-import { defaultEquals } from '../util';
-import LinkedList from './linked-list';
-import { DoublyNode } from './models/linked-list-models';
+import { defaultEquals } from '../util.js';
+import LinkedList from './linked-list.js';
+import { DoublyNode } from './models/linked-list-models.js';
 
 export default class DoublyLinkedList extends LinkedList {
-  constructor(equalsFn = defaultEquals) {
-    super(equalsFn);
+  constructor(isEqual = defaultEquals) {
+    super(isEqual);
     this.tail = undefined;
   }
   push(element) {
@@ -25,20 +25,25 @@ export default class DoublyLinkedList extends LinkedList {
       const node = new DoublyNode(element);
       let current = this.head;
       if (index === 0) {
+        // 插入链表头
         if (this.head == null) { // NEW
+          // 插入链表头：链表为空
           this.head = node;
           this.tail = node; // NEW
         } else {
+          // 插入链表头：链表非空
           node.next = this.head;
           this.head.prev = node; // NEW
           this.head = node;
         }
       } else if (index === this.count) { // last item NEW
+        // 插入链表尾
         current = this.tail;
         current.next = node;
         node.prev = current;
         this.tail = node;
       } else {
+        // 插入链表中间节点
         const previous = this.getElementAt(index - 1);
         current = previous.next;
         node.next = current;
@@ -55,6 +60,7 @@ export default class DoublyLinkedList extends LinkedList {
     if (index >= 0 && index < this.count) {
       let current = this.head;
       if (index === 0) {
+        // 移除链表头节点
         this.head = this.head.next;
         // if there is only one item, then we update tail as well //NEW
         if (this.count === 1) {
@@ -64,11 +70,13 @@ export default class DoublyLinkedList extends LinkedList {
           this.head.prev = undefined;
         }
       } else if (index === this.count - 1) {
+        // 移除链表尾节点
         // last item //NEW
         current = this.tail;
         this.tail = current.prev;
         this.tail.next = undefined;
       } else {
+        // 移除链表中间节点
         current = this.getElementAt(index);
         const previous = current.prev;
         // link previous with current's next - skip it to remove
@@ -84,7 +92,7 @@ export default class DoublyLinkedList extends LinkedList {
     let current = this.head;
     let index = 0;
     while (current != null) {
-      if (this.equalsFn(element, current.element)) {
+      if (this.isEqual(element, current.element)) {
         return index;
       }
       index++;

@@ -1,10 +1,10 @@
-import { Compare, defaultCompare, defaultEquals } from '../util';
-import LinkedList from './linked-list';
+import { Compare, defaultCompare, defaultEquals } from '../util.js';
+import LinkedList from './linked-list.js';
 
 export default class SortedLinkedList extends LinkedList {
-  constructor(equalsFn = defaultEquals, compareFn = defaultCompare) {
-    super(equalsFn);
-    this.equalsFn = equalsFn;
+  constructor(isEqual = defaultEquals, compareFn = defaultCompare) {
+    super(isEqual);
+    // this.isEqual = isEqual;
     this.compareFn = compareFn;
   }
   push(element) {
@@ -25,8 +25,9 @@ export default class SortedLinkedList extends LinkedList {
   getIndexNextSortedElement(element) {
     let current = this.head;
     let i = 0;
-    for (; i < this.size() && current; i++) {
+    for (; i < this.size() && current != null; i++) {
       const comp = this.compareFn(element, current.element);
+      console.log('comp', comp);
       if (comp === Compare.LESS_THAN) {
         return i;
       }

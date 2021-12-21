@@ -1,4 +1,5 @@
-const { DoublyLinkedList } = PacktDataStructuresAlgorithms;
+// const { DoublyLinkedList } = PacktDataStructuresAlgorithms;
+import DoublyLinkedList from './../../src/js/data-structures/doubly-linked-list.js';
 
 const list = new DoublyLinkedList();
 
