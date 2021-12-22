@@ -9,7 +9,7 @@ console.log(set.has(1)); // outputs true
 console.log(set.size()); // outputs 1
 
 set.add(2);
-console.log(set.values()); // outputs [1, 2]
+console.log('use valuesLegacy()', set.valuesLegacy()); // outputs [1, 2]
 console.log(set.has(2)); // true
 console.log(set.size()); // 2
 

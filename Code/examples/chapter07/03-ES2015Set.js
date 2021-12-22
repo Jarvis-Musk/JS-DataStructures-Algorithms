@@ -16,17 +16,19 @@ console.log(set.values()); // outputs [2]
 set.delete(2);
 console.log(set.values()); // outputs []
 
-const setA = new Set();
-setA.add(1);
-setA.add(2);
-setA.add(3);
+const setA = new Set([1, 2, 3]);
+// setA.add(1);
+// setA.add(2);
+// setA.add(3);
 
 const setB = new Set();
 setB.add(2);
 setB.add(3);
+setB.add('3');
 setB.add(4);
 
 // --------- Union ----------
+console.log('--------- Union ----------');
 const union = (set1, set2) => {
   const unionAb = new Set();
   set1.forEach(value => unionAb.add(value));
@@ -38,6 +40,7 @@ console.log(union(setA, setB));
 console.log(new Set([...setA, ...setB]));
 
 // --------- Intersection ----------
+console.log('--------- Intersection ----------');
 const intersection = (set1, set2) => {
   const intersectionSet = new Set();
   set1.forEach(value => {
@@ -49,12 +52,13 @@ const intersection = (set1, set2) => {
 };
 console.log(intersection(setA, setB));
 
-console.log(new Set([...setA].filter(x => setB.has(x))));
+console.log(new Set([...setA].filter(x => setB.has(x)))); // 使用扩展运算符
 
 // alternative - works on FF only
 // console.log(new Set([x for (x of setA) if (setB.has(x))]));
 
 // --------- Difference ----------
+console.log('--------- Difference ----------');
 const difference = (set1, set2) => {
   const differenceSet = new Set();
   set1.forEach(value => {
@@ -64,9 +68,9 @@ const difference = (set1, set2) => {
   });
   return differenceSet;
 };
-console.log(difference(setA, setB));
+console.log(difference(setB, setA));
 
-console.log(new Set([...setA].filter(x => !setB.has(x))));
+console.log(new Set([...setB].filter(x => !setA.has(x))));
 
 // alternative  - works on FF only
 // console.log(new Set([x for (x of setA) if (!setB.has(x))]));

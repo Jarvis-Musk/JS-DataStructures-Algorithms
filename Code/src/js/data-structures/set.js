@@ -5,6 +5,7 @@ export default class Set {
   add(element) {
     if (!this.has(element)) {
       // 添加一个 element 的时候，把它同时作为键和值保存，因为这样有利于查找该元素。
+      // 区别不了 3 和 '3'，如果要区别的话，has() 比较的应该是属性值而不是键值。
       this.items[element] = element;
       return true;
     }
@@ -40,17 +41,35 @@ export default class Set {
     let values = [];
     for(let key in this.items) {
       if(this.items.hasOwnProperty(key)) {
-        values.push(key);
+        values.push(this.items[key]);
       }
     }
     return values;
   }
+
+  /**
+   * 此处实现的 union，intersection 和 difference 方法不会修改当前的 Set 类实例或是作为参数传入的 otherSet。
+   * 没有副作用的方法和函数被称为纯函数。
+   * 纯函数不会修改当前的实例或参数，只会生成一个新的结果。
+   * 这在函数式编程中是非常重要的概念。
+   */
   union(otherSet) {
     const unionSet = new Set();
     this.values().forEach(value => unionSet.add(value));
     otherSet.values().forEach(value => unionSet.add(value));
     return unionSet;
   }
+  intersection_0(otherSet) { 
+    const intersectionSet = new Set(); // {1}
+    const values = this.values(); 
+    for (let i = 0; i < values.length; i++) { // {2}
+      if (otherSet.has(values[i])) { // {3}
+        intersectionSet.add(values[i]); // {4}
+      }
+    }
+    return intersectionSet;
+  }
+  // 优化迭代次数
   intersection(otherSet) {
     const intersectionSet = new Set();
     const values = this.values();
@@ -84,10 +103,20 @@ export default class Set {
     let isSubset = true;
     this.values().every(value => {
       if (!otherSet.has(value)) {
+        /**
+         * forEach 方法会在数组中的每个值上调用。
+         * 在子集逻辑中，当我们发现一个值不存在于 otherSet 中时，可以停止迭代值，表示这不是一个子集。
+         * 只要回调函数返回 true，every 方法就会被调用。如果回调函数返回 false，循环会停止。
+         * 
+         * every 方法为数组中的每个元素执行一次 callback 函数，直到它找到一个会使 callback 返回 falsy 的元素。
+         * 如果发现了一个这样的元素，every 方法将会立即返回 false。
+         * 否则，callback 为每一个元素返回 true，every 就会返回 true。
+         * callback 只会为那些已经被赋值的索引调用。不会为那些被删除或从未被赋值的索引调用。
+         */
         isSubset = false;
-        return false;
+        return false; // every() 停止迭代
       }
-      return true;
+      return true; // every() 继续迭代下一个 value
     });
     return isSubset;
   }
