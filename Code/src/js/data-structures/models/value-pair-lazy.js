@@ -1,4 +1,4 @@
-import { ValuePair } from './value-pair';
+import { ValuePair } from './value-pair.js';
 
 export class ValuePairLazy extends ValuePair {
   constructor(key, value, isDeleted = false) {

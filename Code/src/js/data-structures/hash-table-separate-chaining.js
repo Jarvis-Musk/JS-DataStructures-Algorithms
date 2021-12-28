@@ -1,6 +1,6 @@
-import { defaultToString } from '../util';
-import LinkedList from './linked-list';
-import { ValuePair } from './models/value-pair';
+import { defaultToString } from '../util.js';
+import LinkedList from './linked-list.js';
+import { ValuePair } from './models/value-pair.js';
 
 export default class HashTableSeparateChaining {
   constructor(toStrFn = defaultToString) {
@@ -21,6 +21,7 @@ export default class HashTableSeparateChaining {
   hashCode(key) {
     return this.loseloseHashCode(key);
   }
+  // 分离链接和线性探查需要重写的方法
   put(key, value) {
     if (key != null && value != null) {
       const position = this.hashCode(key);
@@ -32,6 +33,7 @@ export default class HashTableSeparateChaining {
     }
     return false;
   }
+  // 分离链接和线性探查需要重写的方法
   get(key) {
     const position = this.hashCode(key);
     const linkedList = this.table[position];
@@ -46,6 +48,7 @@ export default class HashTableSeparateChaining {
     }
     return undefined;
   }
+  // 分离链接和线性探查需要重写的方法
   remove(key) {
     const position = this.hashCode(key);
     const linkedList = this.table[position];
@@ -67,6 +70,7 @@ export default class HashTableSeparateChaining {
   isEmpty() {
     return this.size() === 0;
   }
+  // 分离链接和线性探查需要重写的方法
   size() {
     let count = 0;
     Object.values(this.table).forEach(linkedList => {
@@ -87,9 +91,7 @@ export default class HashTableSeparateChaining {
     const keys = Object.keys(this.table);
     let objString = `{${keys[0]} => ${this.table[keys[0]].toString()}}`;
     for (let i = 1; i < keys.length; i++) {
-      objString = `${objString},{${keys[i]} => ${this.table[
-        keys[i]
-      ].toString()}}`;
+      objString = `${objString},{${keys[i]} => ${this.table[keys[i]].toString()}}`;
     }
     return objString;
   }

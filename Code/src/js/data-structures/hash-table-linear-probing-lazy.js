@@ -1,8 +1,11 @@
-import { defaultToString } from '../util';
-import { ValuePairLazy } from './models/value-pair-lazy';
+import { defaultToString } from '../util.js';
+import { ValuePairLazy } from './models/value-pair-lazy.js';
 
+// 删除时：软删除（惰性删除）
 export default class HashTableLinearProbingLazy {
   constructor(toStrFn = defaultToString) {
+    console.log('------------ Using HashTableLinearProbingLazy ------------');
+    
     this.toStrFn = toStrFn;
     this.table = {};
   }
@@ -30,10 +33,11 @@ export default class HashTableLinearProbingLazy {
         this.table[position] = new ValuePairLazy(key, value);
       } else {
         let index = position + 1;
-        while (this.table[index] != null && !this.table[position].isDeleted) {
+        while (this.table[index] != null && !this.table[index].isDeleted) {
+          // 继续向下检索的条件：该位置不为空 且 未被删除
           index++;
         }
-        this.table[index] = new ValuePairLazy(key, value);
+        this.table[index] = new ValuePairLazy(key, value); // 覆盖键相同的键值对{1}
       }
       return true;
     }
@@ -49,18 +53,21 @@ export default class HashTableLinearProbingLazy {
       while (
         this.table[index] != null &&
         (this.table[index].key !== key || this.table[index].isDeleted)
-      ) {
+      ) { // 继续向下检索的条件：（当该位置不为空 且 键不同） 或者 （当该位置不为空 且 已标记删除）
         if (this.table[index].key === key && this.table[index].isDeleted) {
+          // 当该位置不为空 且 已标记为删除 且 键相同
+          // 返回 undefined，因为如果删除后新插入了同键的键值对，则原先被标记为删除的键值对就会被覆盖，在上面的{1}处。
+          // 没有被覆盖，仍标记为删除，说明没有新增同键的键值对。
           return undefined;
         }
         index++;
       }
-      if (
+      if ( // 找到的条件：当该位置不为空 且 键相同 且 未被标记删除
         this.table[index] != null &&
         this.table[index].key === key &&
         !this.table[index].isDeleted
       ) {
-        return this.table[position].value;
+        return this.table[index].value;
       }
     }
     return undefined;
@@ -76,10 +83,10 @@ export default class HashTableLinearProbingLazy {
       while (
         this.table[index] != null &&
         (this.table[index].key !== key || this.table[index].isDeleted)
-      ) {
+      ) { // 继续向下检索的条件：（当该位置不为空 且 键不同） 或者 （当该位置不为空 且 已标记删除）
         index++;
       }
-      if (
+      if ( // 找到的条件：当该位置不为空 且 键相同 且 未被标记删除
         this.table[index] != null &&
         this.table[index].key === key &&
         !this.table[index].isDeleted
@@ -111,11 +118,15 @@ export default class HashTableLinearProbingLazy {
       return '';
     }
     const keys = Object.keys(this.table);
-    let objString = `{${keys[0]} => ${this.table[keys[0]].toString()}}`;
-    for (let i = 1; i < keys.length; i++) {
-      objString = `${objString},{${keys[i]} => ${this.table[
-        keys[i]
-      ].toString()}}`;
+    // console.log(`keys: ${keys.toString()}, length: ${keys.length}`);
+    const keysFiltered = keys.filter(key => {
+      return this.table[key].isDeleted === false;
+    }, this);
+    // console.log(`keysFiltered: ${keysFiltered.toString()}, length: ${keysFiltered.length}`);
+
+    let objString = `{${keysFiltered[0]} => ${this.table[keysFiltered[0]].toString()}}`;
+    for (let i = 1; i < keysFiltered.length; i++) {
+      objString = `${objString},{${keysFiltered[i]} => ${this.table[keysFiltered[i]].toString()}}`;
     }
     return objString;
   }
