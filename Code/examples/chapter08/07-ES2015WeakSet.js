@@ -1,5 +1,7 @@
 var set = new WeakSet();
 
+console.log('------------ ES6 WeakMap ------------');
+
 const ob1 = { name: 'Gandalf' };
 const ob2 = { name: 'John' };
 const ob3 = { name: 'Tyrion' };
