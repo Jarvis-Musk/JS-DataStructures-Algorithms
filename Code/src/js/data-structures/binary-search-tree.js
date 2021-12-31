@@ -1,5 +1,5 @@
-import { Compare, defaultCompare } from '../util';
-import { Node } from './models/node';
+import { Compare, defaultCompare } from '../util.js';
+import { Node } from './models/node.js';
 
 export default class BinarySearchTree {
   constructor(compareFn = defaultCompare) {
@@ -47,32 +47,38 @@ export default class BinarySearchTree {
   inOrderTraverse(callback) {
     this.inOrderTraverseNode(this.root, callback);
   }
+  /**
+   * 中序遍历
+   * 接收一个回调函数作为参数。回调函数用来定义我们对遍历到的每个节点进行的操作（访问者模式 Visitor Pattern）。
+   */
   inOrderTraverseNode(node, callback) {
-    if (node != null) {
-      this.inOrderTraverseNode(node.left, callback);
-      callback(node.key);
-      this.inOrderTraverseNode(node.right, callback);
-    }
+    if (node == null) return;
+
+    this.inOrderTraverseNode(node.left, callback);
+    callback(node.key);
+    this.inOrderTraverseNode(node.right, callback);
   }
   preOrderTraverse(callback) {
     this.preOrderTraverseNode(this.root, callback);
   }
+  // 先序遍历
   preOrderTraverseNode(node, callback) {
-    if (node != null) {
-      callback(node.key);
-      this.preOrderTraverseNode(node.left, callback);
-      this.preOrderTraverseNode(node.right, callback);
-    }
+    if (node == null) return;
+
+    callback(node.key);
+    this.preOrderTraverseNode(node.left, callback);
+    this.preOrderTraverseNode(node.right, callback);
   }
   postOrderTraverse(callback) {
     this.postOrderTraverseNode(this.root, callback);
   }
+  // 后序遍历
   postOrderTraverseNode(node, callback) {
-    if (node != null) {
-      this.postOrderTraverseNode(node.left, callback);
-      this.postOrderTraverseNode(node.right, callback);
-      callback(node.key);
-    }
+    if (node == null) return;
+
+    this.postOrderTraverseNode(node.left, callback);
+    this.postOrderTraverseNode(node.right, callback);
+    callback(node.key);
   }
   min() {
     return this.minNode(this.root);
@@ -95,6 +101,7 @@ export default class BinarySearchTree {
     return current;
   }
   remove(key) {
+    // root 被赋值为 removeNode 方法的返回值
     this.root = this.removeNode(this.root, key);
   }
   removeNode(node, key) {
@@ -102,6 +109,7 @@ export default class BinarySearchTree {
       return undefined;
     }
     if (this.compareFn(key, node.key) === Compare.LESS_THAN) {
+      // 如果移除不存在的节点值，最终只会是在叶节点的 left 和 right 再次赋值为 undefined
       node.left = this.removeNode(node.left, key);
       return node;
     } else if (this.compareFn(key, node.key) === Compare.BIGGER_THAN) {
