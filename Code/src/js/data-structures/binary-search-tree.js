@@ -101,7 +101,6 @@ export default class BinarySearchTree {
     return current;
   }
   remove(key) {
-    // root 被赋值为 removeNode 方法的返回值
     this.root = this.removeNode(this.root, key);
   }
   removeNode(node, key) {
