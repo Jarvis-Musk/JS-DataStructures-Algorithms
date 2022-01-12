@@ -152,13 +152,19 @@ export default class AVLTree extends BinarySearchTree {
    * 添加或移除节点时，AVL树会尝试保持自平衡（尽可能尝试转换为完全树）
    */
   removeNode(node, key) {
+    console.log(`AVLTree removeNode run --- node: ${node.key}, key: ${key}`);
+
     node = super.removeNode(node, key); // 父类的removeNode()返回根的引用
+
+    console.log(`node return from BinarySearchTree removeNode: ${node}`);
     if (node == null) {
       return node;
     }
     // verify if tree is balanced
+    console.log(`verify node: ${node.key}`);
     const balanceFactor = this.getBalanceFactor(node);
     if (balanceFactor === BalanceFactor.UNBALANCED_LEFT) {
+      console.log(`左边高`);
       // Left left case
       if (
         this.getBalanceFactor(node.left) === BalanceFactor.BALANCED ||
@@ -168,10 +174,11 @@ export default class AVLTree extends BinarySearchTree {
       }
       // Left right case
       if (this.getBalanceFactor(node.left) === BalanceFactor.SLIGHTLY_UNBALANCED_RIGHT) {
-        return this.rotationLR(node.left);
+        return this.rotationLR(node);
       }
     }
     if (balanceFactor === BalanceFactor.UNBALANCED_RIGHT) {
+      console.log(`右边高`);
       // Right right case
       if (
         this.getBalanceFactor(node.right) === BalanceFactor.BALANCED ||
@@ -181,7 +188,7 @@ export default class AVLTree extends BinarySearchTree {
       }
       // Right left case
       if (this.getBalanceFactor(node.right) === BalanceFactor.SLIGHTLY_UNBALANCED_LEFT) {
-        return this.rotationRL(node.right);
+        return this.rotationRL(node);
       }
     }
     return node;

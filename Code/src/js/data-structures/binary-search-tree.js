@@ -104,28 +104,27 @@ export default class BinarySearchTree {
     this.root = this.removeNode(this.root, key);
   }
   removeNode(node, key) {
+    console.log(`BinarySearchTree removeNode run --- node: ${node.key}, key: ${key}`);
+
     if (node == null) {
       return undefined;
     }
     if (this.compareFn(key, node.key) === Compare.LESS_THAN) {
       // 如果移除不存在的节点值，最终只会是在叶节点的 left 和 right 再次赋值为 undefined
-      node.left = this.removeNode(node.left, key);
+      node.left = this.removeNode(node.left, key);  // AVLTree类实例执行时，此处调用的是复写后的函数
       return node;
     } else if (this.compareFn(key, node.key) === Compare.BIGGER_THAN) {
-      node.right = this.removeNode(node.right, key);
+      node.right = this.removeNode(node.right, key); // AVLTree类实例执行时，此处调用的是复写后的函数
       return node;
     }
     // key is equal to node.item
     // handle 3 special conditions
-    // 1 - a leaf node
-    // 2 - a node with only 1 child
-    // 3 - a node with 2 children
-    // case 1
+    // case 1 - a leaf node
     if (node.left == null && node.right == null) {
       node = undefined;
       return node;
     }
-    // case 2
+    // case 2 - a node with only 1 child
     if (node.left == null) {
       node = node.right;
       return node;
@@ -133,7 +132,7 @@ export default class BinarySearchTree {
       node = node.left;
       return node;
     }
-    // case 3
+    // case 3 - a node with 2 children
     const aux = this.minNode(node.right);
     node.key = aux.key;
     node.right = this.removeNode(node.right, aux.key);

@@ -8,8 +8,11 @@ const keys = [11, 7, 15, 5, 9, 13, 20, 3, 6, 8, 10, 12, 14, 18, 25, 27, 30, 46, 
 keys.forEach(key => avlTree.insert(key));
 
 // 移除
-const keys_needtobe_removed = [70, 46, 30];
-keys_needtobe_removed.forEach(key => avlTree.remove(key));
+const keys_needtobe_removed = [27, 30, 18, 46];
+keys_needtobe_removed.forEach(key => {
+  console.log(`------------ remove key ${key} ------------`);
+  avlTree.remove(key);
+});
 
 console.log('print root:', avlTree.getRoot());
 
