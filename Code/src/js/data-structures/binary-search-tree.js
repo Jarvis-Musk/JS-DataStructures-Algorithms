@@ -138,4 +138,6 @@ export default class BinarySearchTree {
     node.right = this.removeNode(node.right, aux.key);
     return node;
   }
+  // 控制台打印树图
+  printTree() {}
 }

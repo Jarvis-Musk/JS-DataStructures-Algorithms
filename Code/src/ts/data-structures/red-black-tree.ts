@@ -102,8 +102,8 @@ export default class RedBlackTree<T> extends BinarySearchTree<T> {
 
   private fixTreeProperties(node: RedBlackNode<T>) {
     while (node && node.parent && node.parent.color === Colors.RED && node.color !== Colors.BLACK) {
-       let parent = node.parent;
-       const grandParent = parent.parent;
+      let parent = node.parent;
+      const grandParent = parent.parent;
 
       // case A
       if (grandParent && grandParent.left === parent) {
