@@ -6,10 +6,10 @@ export const Colors = {
 };
 
 export class RedBlackNode extends Node {
-  constructor(key) {
+  constructor(key, parent = undefined, color = Colors.RED) {
     super(key);
-    this.parent = undefined; // 该节点的父节点引用
-    this.color = Colors.RED;
+    this.parent = parent; // 该节点的父节点引用
+    this.color = color;
   }
   isRed() {
     return this.color === Colors.RED;
@@ -21,4 +21,9 @@ export class RedBlackNode extends Node {
       this.color = Colors.RED;
     }
   }
+}
+
+export function isNullNode(node) {
+  return node == null ||
+    (node.key == null && node.color === Colors.BLACK && node.parent != null && node.left == null && node.right == null);
 }

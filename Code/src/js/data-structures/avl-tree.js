@@ -17,12 +17,12 @@ export default class AVLTree extends BinarySearchTree {
     this.root = null;
   }
   // 获取节点深度
-  getNodeHeight(node) {
+  /* getNodeHeight(node) {
     if (node == null) {
       return -1;
     }
     return Math.max(this.getNodeHeight(node.left), this.getNodeHeight(node.right)) + 1;
-  }
+  } */
   /**
    * Left left case: rotate right
    * 左-左（LL）：向右的单旋转

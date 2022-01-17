@@ -20,12 +20,12 @@ const printNode = (value) => console.log(value);
 bstree.inOrderTraverse(printNode);
 
 // 先序遍历
-// console.log('------------ preOrderTraverse ------------');
-// bstree.preOrderTraverse(printNode);
+console.log('------------ preOrderTraverse ------------');
+bstree.preOrderTraverse(printNode);
 
 // 后序遍历
-// console.log('------------ postOrderTraverse ------------');
-// bstree.postOrderTraverse(printNode);
+console.log('------------ postOrderTraverse ------------');
+bstree.postOrderTraverse(printNode);
 
 // 搜索最小值
 console.log('min:', bstree.min().key);
@@ -38,3 +38,5 @@ console.log('remove 21:', bstree.remove(21));
 console.log('print root:', bstree.getRoot().toString());
 console.log('------------ inOrderTraverse ------------');
 bstree.inOrderTraverse(printNode);
+
+bstree.printTree();
