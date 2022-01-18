@@ -112,6 +112,7 @@ export default class AVLTree extends BinarySearchTree {
    */
   insert(key) {
     this.root = this.insertNode(this.root, key);
+    this.treeHeight = this.getTreeHeight();
   }
   /**
    * 添加或移除节点时，AVL树会尝试保持自平衡（尽可能尝试转换为完全树）

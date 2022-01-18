@@ -16,7 +16,8 @@ export default class RedBlackTree extends BinarySearchTree {
     return Math.max(this.getNodeHeight(node.left), this.getNodeHeight(node.right)) + 1;
   }
   insert(key) {
-    if (this.root == null) {
+    if (isNullNode(this.root)) {
+    // if (this.root == null) {
       this.root = new RedBlackNode(key);
       this.root.color = Colors.BLACK;
     } else {
@@ -99,13 +100,14 @@ export default class RedBlackTree extends BinarySearchTree {
     }
 
     this.treeHeight = this.getTreeHeight();
+
+    return true;
   }
   /**
-   * a method to fix tree after remove a node
+   * fix tree after remove a node
    * @param {RedBlackNode} node 
    */
   removeFix(node) {
-    console.log('removeFix(node)', node);
     while (node !== this.root && node.color === Colors.BLACK) {
       // node is left child
       if (node === node.parent.left) {
@@ -132,8 +134,7 @@ export default class RedBlackTree extends BinarySearchTree {
           this.rotationRR(node.parent);
           node = this.root;
         }
-      } else {
-        // node is right child
+      } else { // node is right child
         let bro = node.parent.left;
         if (bro.color === Colors.RED) {
           bro.color = Colors.BLACK;
@@ -176,9 +177,7 @@ export default class RedBlackTree extends BinarySearchTree {
     } else {
       console.log('transplant() did not match the condition');
     }
-    if (v != null) {
-      v.parent = u.parent;
-    }
+    v.parent = u.parent;
   }
   /**
    * 红黑树结构规则：
@@ -308,7 +307,7 @@ export default class RedBlackTree extends BinarySearchTree {
     node.right.flipColor();
   }
   isRed(node) {
-    if (!node) {
+    if (!isNullNode(node)) {
       return false;
     }
     return node.isRed();
@@ -318,15 +317,16 @@ export default class RedBlackTree extends BinarySearchTree {
 
     if (isNullNode(node)) {
       if (treeArray[height] == null) { treeArray[height] = []; }
-      treeArray[height].push('*'); // * stand for node which is null
+      const color = node.color === 0 ? 'R' : 'B';
+      treeArray[height].push('*' + color + node.parent.key); // * stand for node which is null
       return;
     }
 
     if (treeArray[height] == null) { treeArray[height] = []; }
     const color = node.color === 0 ? 'R' : 'B';
-    node.parent != null
-      ? treeArray[height].push(node.key + color + node.parent.key)
-      : treeArray[height].push(node.key + color + 'N');
+    isNullNode(node.parent)
+      ? treeArray[height].push(node.key + color + 'N')
+      : treeArray[height].push(node.key + color + node.parent.key);
     this.preOrderTraverseNode2Array(node.left, treeArray, height + 1);
     this.preOrderTraverseNode2Array(node.right, treeArray, height + 1);
   }

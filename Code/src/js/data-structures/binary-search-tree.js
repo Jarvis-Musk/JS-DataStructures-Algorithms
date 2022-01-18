@@ -189,6 +189,8 @@ export default class BinarySearchTree {
     this.printTreeChars(array);
   }
   preOrderTraverseNode2Array(node, treeArray, height) {
+    if (height > (this.treeHeight - 1)) return;
+
     if (node == null) {
       if (treeArray[height] == null) { treeArray[height] = []; }
       treeArray[height].push('*'); // * stand for node which is null
