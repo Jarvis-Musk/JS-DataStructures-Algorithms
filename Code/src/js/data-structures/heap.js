@@ -1,4 +1,4 @@
-import { Compare, defaultCompare, reverseCompare, swap } from '../util';
+import { Compare, defaultCompare, reverseCompare, swap } from '../util.js';
 
 export class MinHeap {
   constructor(compareFn = defaultCompare) {
@@ -26,18 +26,19 @@ export class MinHeap {
   clear() {
     this.heap = [];
   }
+  // 返回最小值（最小堆）或最大值（最大堆）且不会移除这个值
   findMinimum() {
     return this.isEmpty() ? undefined : this.heap[0];
   }
   insert(value) {
-    if (value != null) {
-      const index = this.heap.length;
-      this.heap.push(value);
-      this.siftUp(index);
-      return true;
-    }
-    return false;
+    if (value == null) { return false; }
+
+    const index = this.heap.length;
+    this.heap.push(value);
+    this.siftUp(index);
+    return true;
   }
+  // 下移沉降
   siftDown(index) {
     let element = index;
     const left = this.getLeftIndex(index);
@@ -55,22 +56,32 @@ export class MinHeap {
     ) {
       element = right;
     }
-    if (index !== element) {
+    if (index !== element) { // 如果两个子节点中存在更小的值
       swap(this.heap, index, element);
       this.siftDown(element);
     }
   }
+  // 上移冒泡
   siftUp(index) {
     let parent = this.getParentIndex(index);
     while (
       index > 0 &&
       this.compareFn(this.heap[parent], this.heap[index]) === Compare.BIGGER_THAN
     ) {
+      /**
+       * MinHeap:
+       * 如果父节点大于插入值
+       * 重复这个过程直到堆的根节点（作为父节点）也经过了 swap （交换节点和父节点位置）的操作，
+       * 此时，(index === 1 || index === 2) && parent === 0
+       * 再次交换位置后
+       * index === 0 且 parent === -1
+       */
       swap(this.heap, parent, index);
       index = parent;
       parent = this.getParentIndex(index);
     }
   }
+  // 移除最小值（最小堆）或最大值（最大堆），并返回这个值
   extract() {
     if (this.isEmpty()) {
       return undefined;
@@ -80,6 +91,8 @@ export class MinHeap {
     }
     const removedValue = this.heap[0];
     this.heap[0] = this.heap.pop();
+    // 在移除后，我们将堆的最后一个元素移动至根部并执行 siftDown 函数，
+    // 表示我们将交换元素直到堆的结构正常。
     this.siftDown(0);
     return removedValue;
   }
@@ -102,5 +115,8 @@ export class MaxHeap extends MinHeap {
     super(compareFn);
     this.compareFn = compareFn;
     this.compareFn = reverseCompare(compareFn);
+  }
+  findMaximum() {
+    return this.findMinimum();
   }
 }

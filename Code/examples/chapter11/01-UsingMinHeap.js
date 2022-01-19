@@ -1,13 +1,11 @@
-const { MinHeap } = PacktDataStructuresAlgorithms;
+// const { MinHeap } = PacktDataStructuresAlgorithms;
+import { MinHeap } from './../../src/js/data-structures/heap.js';
 
+console.log('------------ Min Heap ------------');
 let heap = new MinHeap();
 
-heap.insert(2);
-heap.insert(3);
-heap.insert(4);
-heap.insert(5);
-
-heap.insert(2);
+const value_tobe_insert = [1, 3, 4, 6, 5, 7, 4];
+value_tobe_insert.forEach(value => heap.insert(value));
 
 console.log(heap.getAsArray());
 

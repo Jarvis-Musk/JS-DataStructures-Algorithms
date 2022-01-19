@@ -43,8 +43,15 @@ export function swap(array, a, b) {
   /* const temp = array[a];
   array[a] = array[b];
   array[b] = temp; */
+
+  // ES6 引入的解构赋值语法，可用来进行值的互换
+  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment#swapping_variables
+  // 目前数组解构赋值比正常赋值要慢 https://bugzilla.mozilla.org/show_bug.cgi?id=1177319
   [array[a], array[b]] = [array[b], array[a]];
 }
+
+export const swap2 = (array, a, b) => [array[a], array[b]] = [array[b], array[a]];
+
 export function reverseCompare(compareFn) {
   return (a, b) => compareFn(b, a);
 }
