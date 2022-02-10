@@ -1,15 +1,19 @@
-const { Graph } = PacktDataStructuresAlgorithms;
-const { Stack } = PacktDataStructuresAlgorithms;
-const { BFS } = PacktDataStructuresAlgorithms;
-const { breadthFirstSearch } = PacktDataStructuresAlgorithms;
+// const { Graph } = PacktDataStructuresAlgorithms;
+// const { Stack } = PacktDataStructuresAlgorithms;
+// const { BFS } = PacktDataStructuresAlgorithms;
+// const { breadthFirstSearch } = PacktDataStructuresAlgorithms;
+import Graph from './../../src/js/data-structures/graph.js';
+import Stack from './../../src/js/data-structures/stack.js';
+import { BFS, breadthFirstSearch } from './../../src/js/algorithms/graph/breadth-first-search.js';
 
 const graph = new Graph();
 
-const myVertices = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I'];
+const myVertices = ['A', 'E', 'F', 'G', 'I', 'H', 'C', 'B', 'D'];
 
-for (let i = 0; i < myVertices.length; i++) {
+/* for (let i = 0; i < myVertices.length; i++) {
   graph.addVertex(myVertices[i]);
-}
+} */
+myVertices.forEach(vertex => graph.addVertex(vertex));
 graph.addEdge('A', 'B');
 graph.addEdge('A', 'C');
 graph.addEdge('A', 'D');
@@ -27,14 +31,14 @@ console.log(graph.toString());
 
 console.log('********* bfs with callback ***********');
 
-const printVertex = (value) => console.log('Visited vertex: ' + value);
+const printVertex = (value) => console.log('The vertex has been fully explored: ' + value);
 
 breadthFirstSearch(graph, myVertices[0], printVertex);
 
 console.log('********* sorthest path - BFS ***********');
 const shortestPathA = BFS(graph, myVertices[0]);
-console.log(shortestPathA.distances);
-console.log(shortestPathA.predecessors);
+console.log('distances:', shortestPathA.distances);
+console.log('predecessors:', shortestPathA.predecessors);
 
 //from A to all other vertices
 const fromVertex = myVertices[0];

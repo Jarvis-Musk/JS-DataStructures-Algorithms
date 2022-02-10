@@ -1,24 +1,34 @@
-const { Graph } = PacktDataStructuresAlgorithms;
-const { depthFirstSearch } = PacktDataStructuresAlgorithms;
-const { DFS } = PacktDataStructuresAlgorithms;
+// const { Graph } = PacktDataStructuresAlgorithms;
+// const { depthFirstSearch } = PacktDataStructuresAlgorithms;
+// const { DFS } = PacktDataStructuresAlgorithms;
+import Graph from './../../src/js/data-structures/graph.js';
+import { DFS, depthFirstSearch } from './../../src/js/algorithms/graph/depth-first-search.js';
 
 let graph = new Graph(true);
 
-let myVertices = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I'];
+// let myVertices = ['A', 'E', 'F', 'G', 'H', 'I', 'C', 'B', 'D'];
+let myVertices = ['A', 'B', 'C', 'D', 'E', 'F'];
 
-for (let i = 0; i < myVertices.length; i++) {
+/* for (let i = 0; i < myVertices.length; i++) {
   graph.addVertex(myVertices[i]);
-}
-graph.addEdge('A', 'B');
+} */
+myVertices.forEach(vertex => graph.addVertex(vertex));
 graph.addEdge('A', 'C');
 graph.addEdge('A', 'D');
-graph.addEdge('C', 'D');
-graph.addEdge('C', 'G');
-graph.addEdge('D', 'G');
-graph.addEdge('D', 'H');
+graph.addEdge('B', 'D');
 graph.addEdge('B', 'E');
-graph.addEdge('B', 'F');
-graph.addEdge('E', 'I');
+graph.addEdge('C', 'F');
+graph.addEdge('F', 'E');
+// graph.addEdge('A', 'B');
+// graph.addEdge('A', 'C');
+// graph.addEdge('A', 'D');
+// graph.addEdge('C', 'D');
+// graph.addEdge('C', 'G');
+// graph.addEdge('D', 'G');
+// graph.addEdge('D', 'H');
+// graph.addEdge('B', 'E');
+// graph.addEdge('B', 'F');
+// graph.addEdge('E', 'I');
 
 console.log('********* printing graph ***********');
 
@@ -34,10 +44,11 @@ console.log('********* topological sort - DFS ***********');
 
 graph = new Graph(true); // directed graph
 
-myVertices = ['A', 'B', 'C', 'D', 'E', 'F'];
-for (i = 0; i < myVertices.length; i++) {
+myVertices = ['B', 'A', 'C', 'D', 'E', 'F'];
+/* for (let i = 0; i < myVertices.length; i++) {
   graph.addVertex(myVertices[i]);
-}
+} */
+myVertices.forEach(vertex => graph.addVertex(vertex));
 graph.addEdge('A', 'C');
 graph.addEdge('A', 'D');
 graph.addEdge('B', 'D');
@@ -51,11 +62,11 @@ console.log('finished', result.finished);
 console.log('predecessors', result.predecessors);
 
 const fTimes = result.finished;
-s = '';
+let s = '';
 for (let count = 0; count < myVertices.length; count++) {
   let max = 0;
   let maxName = null;
-  for (i = 0; i < myVertices.length; i++) {
+  for (let i = 0; i < myVertices.length; i++) {
     if (fTimes[myVertices[i]] > max) {
       max = fTimes[myVertices[i]];
       maxName = myVertices[i];
